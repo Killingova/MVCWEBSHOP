@@ -1,0 +1,12 @@
+# Aktiviert die RewriteEngine von Apache
+RewriteEngine On
+# Setzt den Basispfad für die Rewrite-Regeln, entfernt für die Direktinstallation im Root
+RewriteBase /
+# Verhindert, dass Anfragen an index.php weitergeleitet werden, um Endlosschleifen zu vermeiden
+RewriteRule ^index\.php$ - [L]
+# Prüft, ob die angeforderte Datei nicht als physische Datei existiert
+RewriteCond %{REQUEST_FILENAME} !-f
+# Prüft, ob die angeforderte Ressource nicht als Verzeichnis existiert
+RewriteCond %{REQUEST_FILENAME} !-d
+# Leitet alle anderen Anfragen an index.php um, [L] bedeutet "Letzte Regel"
+RewriteRule . /index.php [L]
